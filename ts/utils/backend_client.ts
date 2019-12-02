@@ -17,7 +17,7 @@ const PRICES_ENDPOINT = '/prices';
 const RELAYERS_ENDPOINT = '/relayers';
 const TOKENS_ENDPOINT = '/tokens';
 const CFL_METRICS_ENDPOINT = '/cfl-metrics';
-const SUBSCRIBE_SUBSTACK_NEWSLETTER_ENDPOINT = '/newsletter_subscriber/substack';
+const SUBSCRIBE_MAILCHIMP_NEWSLETTER_ENDPOINT = '/newsletter_subscriber/mailchimp';
 
 export const backendClient = {
     async getGasInfoAsync(): Promise<WebsiteBackendGasInfo> {
@@ -47,10 +47,10 @@ export const backendClient = {
         const result = await fetchUtils.requestAsync(utils.getBackendBaseUrl(), TOKENS_ENDPOINT);
         return result;
     },
-    async subscribeToNewsletterAsync(email: string): Promise<Response> {
-        const result = await fetchUtils.postAsync(utils.getBackendBaseUrl(), SUBSCRIBE_SUBSTACK_NEWSLETTER_ENDPOINT, {
+    async subscribeToNewsletterAsync(email: string, referrer: string): Promise<Response> {
+        const result = await fetchUtils.postAsync(utils.getBackendBaseUrl(), SUBSCRIBE_MAILCHIMP_NEWSLETTER_ENDPOINT, {
             email,
-            referrer: window.location.href,
+            referrer,
         });
         return result;
     },
